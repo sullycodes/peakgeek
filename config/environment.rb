@@ -8,8 +8,8 @@ configure :development do
 end
 
 if ENV['SINATRA_ENV'] == "development"
-    require_relative '../secrets.rb'
+    # require_relative '../secrets.rb'
 end
 
-require_relative '../constants'
+# require_relative '../constants'
 require_all 'app'
