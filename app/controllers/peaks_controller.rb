@@ -2,6 +2,7 @@ class PeaksController < ApplicationController
 
     get '/peaks' do
         # authenticate
+        @user = User.find_by(params[:user_id])
         @peaks = Peak.all
         erb :'peaks/index'
     end
@@ -16,15 +17,17 @@ class PeaksController < ApplicationController
             name: params[:name], 
             location: params[:location], 
             elevation: params[:elevation], 
-            difficulty: params[:difficulty],
+            # difficulty: params[:difficulty],
             content: params[:content]
             )
+        # @user.peaks << peak
         redirect to "/peaks/#{@peak.id}"
     end
 
-    # get '/peaks/:id' do
-    #     erb :'peaks/show'
-    # end
+    get '/peaks/:id' do
+        @user = User.find_by(params[:user_id])
+        erb :'peaks/show'
+    end
 
     # get 'peaks/:id/edit' do
     #     erb :'peaks/edit'

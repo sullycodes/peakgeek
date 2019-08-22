@@ -1,8 +1,6 @@
 class SessionsController < ApplicationController
 
     get '/login' do
-        redirect '/peaks' if logged_in?
-        @failed = false
         erb :'sessions/login'
     end
 
@@ -16,7 +14,7 @@ class SessionsController < ApplicationController
             erb :'sessions/login'
         end
     end
-    
+
     get '/signup' do
         erb :'sessions/signup'
     end
@@ -30,6 +28,11 @@ class SessionsController < ApplicationController
             )
         session[:user_id] = @user.id
         redirect '/peaks'   
+    end
+
+    get '/logout' do
+        session.clear
+        redirect '/'
     end
 
 end

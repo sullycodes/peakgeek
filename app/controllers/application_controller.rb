@@ -4,11 +4,15 @@ class ApplicationController < Sinatra::Base
       set :public_folder, 'public'
       set :views, 'app/views' 
       enable :sessions
-      # set :session_secret, 'password_security'
+      set :session_secret, SESSION_SECRET 
     end
   
     get '/' do
-      erb :'peaks/index'
+      if logged_in?
+        redirect '/peaks'
+      else
+        redirect '/login'
+      end
     end
 
     helpers do
@@ -27,6 +31,12 @@ class ApplicationController < Sinatra::Base
          end
       end
       
+      def cap_all_words(string)
+        string.split(" ").map do |w|
+          w.capitalize
+        end.join(" ").to_s
+      end
+  
   end
 
 end
