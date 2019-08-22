@@ -8,10 +8,10 @@ class ApplicationController < Sinatra::Base
     end
   
     get '/' do
-      # if !logged_in?
-      #   erb :'sessions/login'
-      # end
-      # 'Test!'
+      @session = session[:user_id]
+      if logged_in?
+        erb :'peaks/index'
+      end
       redirect '/login'
     end
 

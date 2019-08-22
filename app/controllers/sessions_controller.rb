@@ -5,6 +5,11 @@ class SessionsController < ApplicationController
     end
 
     post '/login' do
+
+    end
+
+    get '/signup' do
+    
     end
 
 end
