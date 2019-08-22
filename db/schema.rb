@@ -16,9 +16,8 @@ ActiveRecord::Schema.define(version: 2019_08_21_161900) do
     t.string "name"
     t.string "location"
     t.integer "elevation"
-    t.integer "elevation_gain"
     t.integer "difficulty"
-    t.string "review"
+    t.string "content"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

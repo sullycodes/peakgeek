@@ -1,5 +1,5 @@
-require 'bundler'
-require "sinatra/activerecord"
+require 'bundler/setup'
+#require "sinatra/activerecord"
 
 Bundler.require
 

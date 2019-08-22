@@ -4,9 +4,8 @@ class CreatePeaks < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :location
       t.integer :elevation
-      t.integer :elevation_gain
       t.integer :difficulty 
-      t.string :review
+      t.string :content
       t.integer :user_id
       t.timestamps
     end

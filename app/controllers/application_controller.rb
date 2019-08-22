@@ -8,11 +8,7 @@ class ApplicationController < Sinatra::Base
     end
   
     get '/' do
-      @session = session[:user_id]
-      if logged_in?
-        erb :'peaks/index'
-      end
-      redirect '/login'
+      erb :'peaks/index'
     end
 
     helpers do
