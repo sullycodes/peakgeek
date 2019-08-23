@@ -3,7 +3,7 @@ class PeaksController < ApplicationController
     get '/peaks' do
         authenticate
         @user = current_user
-        @peaks = Peak.all
+        @peaks = @user.peaks
         erb :'peaks/index'
     end 
 
@@ -19,7 +19,8 @@ class PeaksController < ApplicationController
                 name: params[:name], 
                 location: params[:location], 
                 elevation: params[:elevation], 
-                content: params[:content]
+                content: params[:content],
+                user: @user
             )
             redirect to "/peaks/#{@peak.id}"
         else
@@ -57,12 +58,38 @@ class PeaksController < ApplicationController
                 elevation: params[:elevation], 
                 content: params[:content]
             )
-            @peak.save
             erb :'peaks/show'
         else
-            redirect '/peaks/:id/edit'
+            @peak = Peak.find(params[:id])
+            @failed = true
+            # redirect "peaks/#{params[:id]}/edit"
+            erb :'peaks/edit'
         end 
     end
+
+    # patch '/peaks/:id' do
+    #     if fields_not_empty?
+    #         @user = current_user
+    #         @peak = Peak.find(params[:id])
+    #         @peak.update(
+    #             name: params[:name], 
+    #             location: params[:location], 
+    #             elevation: params[:elevation], 
+    #             content: params[:content]
+    #         )
+    #         if @peak.save
+    #             erb :'peaks/show'
+    #         else
+    #             erb :'peaks/edit'
+    #         end
+    #         # if @peak.save
+    #         # display erb show
+    #         # else
+    #         # erb edit ===> inside of your edit view you can do <%= if @peak.errors.any? %> <p><%= @peak.errors.full_messages.each do |message| 
+    #     # else  
+    #     #     redirect "peaks/#{params[:id]}/edit"
+    #     end 
+    # end
 
     delete '/peaks/:id/delete' do
         if logged_in?

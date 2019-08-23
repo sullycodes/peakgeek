@@ -19,4 +19,8 @@
 
 </form>
 
-<p><a href="/logout">Log out</a><p>
+<p><a href="/logout">Log out</a> or <a href="/peaks"> See My Peaks</a><p>
+
+<% if @failed %>
+    <p class="danger">Fields cannot be left blank. Please, try again.</p>
+<% end %>   
