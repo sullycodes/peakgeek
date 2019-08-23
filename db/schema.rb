@@ -16,7 +16,6 @@ ActiveRecord::Schema.define(version: 2019_08_21_161900) do
     t.string "name"
     t.string "location"
     t.integer "elevation"
-    t.integer "difficulty"
     t.string "content"
     t.integer "user_id"
     t.datetime "created_at", null: false
@@ -27,7 +26,6 @@ ActiveRecord::Schema.define(version: 2019_08_21_161900) do
     t.string "name"
     t.string "username"
     t.string "password_digest"
-    t.string "ability"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

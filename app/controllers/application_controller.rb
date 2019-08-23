@@ -36,6 +36,10 @@ class ApplicationController < Sinatra::Base
           w.capitalize
         end.join(" ").to_s
       end
+
+      def fields_not_empty?
+        !params[:name].empty? && !params[:location].empty? && !params[:elevation].empty? && !params[:content].empty?
+      end
   
   end
 

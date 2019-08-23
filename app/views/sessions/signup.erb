@@ -1,6 +1,6 @@
 <h3> Sign Up! </h3>
 
-<form action="/signup" method="POST">
+<form autocomplete="off" action="/signup" method="POST">
     <p><label for="name">Name (first, last): </label>
     <input type="text" name="name" id="name"></p>
     
@@ -10,12 +10,5 @@
     <p><label for="password">Password: </label>
     <input type="password" name="password" id="password"></p>
     
-    <p><label for="ability">Hiking Ability: </label>
-        <select name="ability">
-            <option value="Beginner">Beginner</option>
-            <option value="Intermediate">Intermediate</option>
-            <option value="Advanced">Advanced</option>
-        </select>
-    </p>
     <input type="submit" value="Sign Up">
 </form>

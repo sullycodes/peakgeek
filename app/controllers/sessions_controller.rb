@@ -1,12 +1,14 @@
 class SessionsController < ApplicationController
 
     get '/login' do
+        redirect '/peaks' if logged_in?
+        @failed = false
         erb :'sessions/login'
     end
 
     post '/login' do    
         @user = User.find_by(username: params[:username])
-        if !!@user && @user.authenticate(params[:password]) #authenticate is method from bcrypt
+        if !!@user && @user.authenticate(params[:password]) 
                session[:user_id] = @user.id
                redirect '/peaks'
         else
@@ -16,6 +18,8 @@ class SessionsController < ApplicationController
     end
 
     get '/signup' do
+        redirect '/peaks' if logged_in?
+        session.clear
         erb :'sessions/signup'
     end
 
@@ -24,10 +28,9 @@ class SessionsController < ApplicationController
             name: params[:name],
             username: params[:username], 
             password: params[:password], 
-            ability: params[:ability]
             )
         session[:user_id] = @user.id
-        redirect '/peaks'   
+        redirect '/peaks/new'
     end
 
     get '/logout' do

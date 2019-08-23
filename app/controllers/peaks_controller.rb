@@ -1,47 +1,79 @@
 class PeaksController < ApplicationController
 
     get '/peaks' do
-        # authenticate
-        @user = User.find_by(params[:user_id])
+        authenticate
+        @user = current_user
         @peaks = Peak.all
         erb :'peaks/index'
-    end
+    end 
 
     get '/peaks/new' do
+        @failed = false
         erb :'peaks/new'
     end
 
     post '/peaks' do
-        @user = User.find_by(params[:user_id])
-        @peak = Peak.create(
-            name: params[:name], 
-            location: params[:location], 
-            elevation: params[:elevation], 
-            # difficulty: params[:difficulty],
-            content: params[:content]
+        if fields_not_empty?
+            @user = current_user
+            @peak = Peak.create(
+                name: params[:name], 
+                location: params[:location], 
+                elevation: params[:elevation], 
+                content: params[:content]
             )
-        # @user.peaks << peak
-        redirect to "/peaks/#{@peak.id}"
+            redirect to "/peaks/#{@peak.id}"
+        else
+            @failed = true
+            erb :'peaks/new'
+        end
     end
 
     get '/peaks/:id' do
-        @user = User.find_by(params[:user_id])
-        erb :'peaks/show'
+        if logged_in?
+            @user = current_user
+            @peak = Peak.find(params[:id])
+            erb :'peaks/show'
+        else
+            redirect '/login'
+        end
     end
 
-    # get 'peaks/:id/edit' do
-    #     erb :'peaks/edit'
-    # end
+    get '/peaks/:id/edit' do
+        if logged_in?
+            @peak = Peak.find(params[:id])
+            erb :'peaks/edit'
+        else
+            redirect '/login'
+        end
+    end
 
-    # patch 'peaks/:id' do
-    # end
+    patch '/peaks/:id' do
+        if fields_not_empty?
+            @user = current_user
+            @peak = Peak.find(params[:id])
+            @peak.update(
+                name: params[:name], 
+                location: params[:location], 
+                elevation: params[:elevation], 
+                content: params[:content]
+            )
+            @peak.save
+            erb :'peaks/show'
+        else
+            redirect '/peaks/:id/edit'
+        end 
+    end
 
-    # delete 'peaks/:id' do
-    # end
-
-
-    # PATCH	'/peaks/:id'	update action	modifies an existing article based on ID in the url
-    # PUT	'/peaks/:id'	update action	replaces an existing article based on ID in the url
+    delete '/peaks/:id/delete' do
+        if logged_in?
+          @peak = Peak.find(params[:id])
+          if @peak.user_id == current_user.id
+            @peak.delete
+          end
+        else
+          redirect 'login'
+        end
+      end
 
 end
 

@@ -1,6 +1,6 @@
 <h3> Login Page!</h3>
 
-<form action="/login" method="POST">
+<form autocomplete="off" action="/login" method="POST">
     <p><label for="username">Username</label>
     <input type="text" name="username" id="username"></p>
     <p><label for="password">Password</label>
@@ -8,6 +8,6 @@
     <input type="submit" value="Login">
     <p> Not a member? Then <a href="/signup">Sign up!</a></p>
    <% if @failed %>
-        <p class="danger">Your username/password combo was incorrect</p>
+        <p class="danger">Something went wrong. Enter again, please.</p>
     <% end %>
 </form>

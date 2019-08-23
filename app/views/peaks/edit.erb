@@ -1,0 +1,22 @@
+<h3> Edit Your Peak</h3>
+
+<form action="/peaks/<%= @peak.id%>" method="POST">
+    <input id="hidden" type="hidden" name="_method" value="PATCH">
+
+    <p><label for="name">Peak Name</label>
+    <input type="text" name="name" id="name" value="<%= @peak.name%>"></p>
+
+    <p><label for="location">Location</label>
+    <input type="text" name="location" id="location" value="<%= @peak.location%>"></p>
+
+    <p><label for="elevation">Elevation</label>
+    <input type="text" name="elevation" id="elevation" value="<%= @peak.elevation%>"></p>
+
+    <p><label for="content">How was your experience?</label></p>
+    <p><textarea rows="10" cols="80" name="content" id="content"><%= @peak.content%></textarea></p>
+    
+    <p><input type="submit" value="Submit Peak"></p>
+
+</form>
+
+<p><a href="/logout">Log out</a><p>
