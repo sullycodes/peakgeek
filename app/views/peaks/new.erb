@@ -1,6 +1,10 @@
 <h3> Add a Peak to your list of Glory</h3>
 
-<form action="/peaks" method="POST">
+<% if @failed %>
+    <p class="danger">Please, complete all fields.</p>
+<% end %>
+
+<form class="peak_info" action="/peaks" method="POST">
 
     <p><label for="name">Peak Name</label>
     <input type="text" name="name" id="name"></p>
@@ -12,13 +16,9 @@
     <input type="text" name="elevation" id="elevation"></p>
 
     <p><label for="content">How was your experience?</label></p>
-    <p><textarea rows="10" cols="80" name="content" id="content"></textarea></p>
+    <p><textarea rows="10" cols="60" name="content" id="content"></textarea></p>
     
     <p><input type="submit" value="Submit Peak"></p>
-
-    <% if @failed %>
-        <p class="danger">Please, complete all fields.</p>
-    <% end %>
 
 </form>
 

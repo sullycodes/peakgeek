@@ -1,19 +1,20 @@
-<h2> <%= cap_all_words(@user.name) %> Climbed This Shit! </h2>
+<h3>You Climbed This,<br><%= cap_all_words(@user.name) %>! </h3>
 
-<h3><%= @peak.name %></h3>
-<p>Location: <%= @peak.location %></p>
-<p>Elevation: <%= @peak.elevation %></p>
-<p><%= cap_all_words(@user.name) %>'s Experience:</p> 
-<p><%= @peak.content %></p>
+<h3><%= @peak.name.upcase %></h3>
 
-<p>
-    <button onclick="window.location.href = '/peaks/<%= @peak.id %>/edit';">Edit</button>
-        
+<div class="peak_info">
+    <p><span class="peak-info-attribute">Location: </span><%= @peak.location %></p>
+    <p><span class="peak-info-attribute">Elevation: </span><%= @peak.elevation %> feet</p>
+    <p><span class="peak-info-attribute">Your Experience: </span></p> 
+    <p><span class="indent"><%= @peak.content %></span></p>
+</div>
+    
+    <button onclick="window.location.href = '/peaks/<%= @peak.id %>/edit';">Edit</button> 
+  
     <form action="/peaks/<%= @peak.id %>/delete" method="post">
         <input type="hidden" id="hidden" name="_method" value="DELETE">
         <button type="submit" class="btn btn-danger">Delete</button>
     </form>
-</p>
 
 <p><a href="/logout">Log out</a> or <a href="/peaks"> See My Peaks</a><p> 
 

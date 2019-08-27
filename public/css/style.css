@@ -1,7 +1,21 @@
-body {
-    background-color:green;
-}
+html {margin: 0, padding: 0;}
 
-.danger {
-    color: red;
-}
+body { font-family: 'Georgia', sans-serif; font-size: 16px; color: black; line-height: 30px; text-align: center; background-color: #F0F0F0; margin: 0; padding: 0;}
+
+header {padding: 0; margin: 0; height: 80px; background-color: green;}
+
+header h1 {margin:0; padding: 20px 0; color: white; font-size: 30px;}
+
+#wrapper {width: 600px; margin: 20px auto; background-color: white; border-radius: 25px; padding: 10px;}
+
+.danger {color: red;}
+
+ul.peak_list {margin-left: 120px; text-align: left;}
+
+.peak_info {text-align: left; margin-left: 120px;}
+
+.peak-info-attribute {font-weight: bold;}
+
+.indent {margin-left: 40px;}
+
+/* .center {margin-left: 0; text-align: center;} */

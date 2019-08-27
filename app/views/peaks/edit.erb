@@ -1,6 +1,10 @@
 <h3> Edit Your Peak</h3>
 
-<form action="/peaks/<%= @peak.id%>" method="POST">
+<% if @failed %>
+    <p class="danger">Fields cannot be left blank. Please, try again.</p>
+<% end %> 
+
+<form class="peak_info" action="/peaks/<%= @peak.id%>" method="POST">
     <input id="hidden" type="hidden" name="_method" value="PATCH">
 
     <p><label for="name">Peak Name</label>
@@ -13,14 +17,10 @@
     <input type="text" name="elevation" id="elevation" value="<%= @peak.elevation%>"></p>
 
     <p><label for="content">How was your experience?</label></p>
-    <p><textarea rows="10" cols="80" name="content" id="content"><%= @peak.content%></textarea></p>
+    <p><textarea rows="10" cols="60" name="content" id="content"><%= @peak.content%></textarea></p>
     
     <p><input type="submit" value="Submit Peak"></p>
 
 </form>
 
-<p><a href="/logout">Log out</a> or <a href="/peaks"> See My Peaks</a><p>
-
-<% if @failed %>
-    <p class="danger">Fields cannot be left blank. Please, try again.</p>
-<% end %>   
+<p><a href="/logout">Log out</a> or <a href="/peaks"> See My Peaks</a><p>  

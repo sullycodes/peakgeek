@@ -1,11 +1,14 @@
 
-<h2><%= cap_all_words(@user.name) %>'s Peaks of Glory</h2> 
+<h2><%= cap_all_words(@user.name) %>'s <br>Peaks of Glory</h2> 
 
-<ul>
+<ul class="peak_list">
     <% @peaks.each do |p| %>     
-       <li><a href="/peaks/<%=p.id%>"> <%= p.name %> </a><li
+        <li>
+            <a href="/peaks/<%= p.id %>"><%= p.name %></a>
+       </li>
     <% end %>
 </ul>
-<p><a href="/peaks/new">Add a new peak to your list</a> or
+
+<p><a href="/peaks/new">Add a new peak</a> or
 <a href="/logout">Log out</a><p>
 

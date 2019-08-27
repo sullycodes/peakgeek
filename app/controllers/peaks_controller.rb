@@ -30,21 +30,24 @@ class PeaksController < ApplicationController
     end
 
     get '/peaks/:id' do
-        if logged_in?
-            @user = current_user
-            @peak = Peak.find(params[:id])
+        authenticate
+        @user = current_user
+        @peak = Peak.find(params[:id])
+        if @user.id == @peak.user_id
             erb :'peaks/show'
         else
-            redirect '/login'
+            erb :'sessions/unauthorized'
         end
     end
 
     get '/peaks/:id/edit' do
-        if logged_in?
-            @peak = Peak.find(params[:id])
+        authenticate
+        @user = current_user
+        @peak = Peak.find(params[:id])
+        if @user.id == @peak.user_id
             erb :'peaks/edit'
         else
-            redirect '/login'
+            erb :'sessions/unauthorized'
         end
     end
 
@@ -67,38 +70,14 @@ class PeaksController < ApplicationController
         end 
     end
 
-    # patch '/peaks/:id' do
-    #     if fields_not_empty?
-    #         @user = current_user
-    #         @peak = Peak.find(params[:id])
-    #         @peak.update(
-    #             name: params[:name], 
-    #             location: params[:location], 
-    #             elevation: params[:elevation], 
-    #             content: params[:content]
-    #         )
-    #         if @peak.save
-    #             erb :'peaks/show'
-    #         else
-    #             erb :'peaks/edit'
-    #         end
-    #         # if @peak.save
-    #         # display erb show
-    #         # else
-    #         # erb edit ===> inside of your edit view you can do <%= if @peak.errors.any? %> <p><%= @peak.errors.full_messages.each do |message| 
-    #     # else  
-    #     #     redirect "peaks/#{params[:id]}/edit"
-    #     end 
-    # end
-
     delete '/peaks/:id/delete' do
-        if logged_in?
-          @peak = Peak.find(params[:id])
-          if @peak.user_id == current_user.id
+        authenticate
+        @peak = Peak.find(params[:id])
+        if @peak.user_id == current_user.id
             @peak.delete
-          end
+            redirect '/peaks'
         else
-          redirect 'login'
+            erb :'sessions/unauthorized'
         end
       end
 
