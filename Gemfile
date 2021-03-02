@@ -14,6 +14,6 @@ gem "sqlite3", "~> 1.4"
 
 gem "bcrypt", "~> 3.1"
 
-gem "activerecord", "= 5.2.3"
+gem "activerecord", "5.2.4.5"
 
 gem "pry", "~> 0.12.2"
